@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
 
 public class Game {
 	
@@ -77,5 +79,29 @@ public class Game {
 		}
 		
 		return null;
+	}
+	
+	public Vector2 getDistanceFromPlatform(float x, float y, float width, float height, Platform platform) {
+		Vector2 distance = new Vector2();
+		
+		//check if it is on the left or right
+		//left
+		if (x + width/2 < platform.x + platform.width / 2) {
+			distance.x = x + width - platform.x;
+		} else {
+			//right
+			distance.x = - (platform.x + platform.width - x);
+		}
+		
+		//check if it is on the top or bottom
+		//bottom
+		if (y + height/2 < platform.y + platform.height / 2) {
+			distance.y = - (y + height - platform.y);
+		} else {
+			//top
+			distance.y = platform.y + platform.height - y;
+		}
+		
+		return distance;
 	}
 }

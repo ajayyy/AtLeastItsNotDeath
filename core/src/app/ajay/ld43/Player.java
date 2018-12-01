@@ -1,8 +1,11 @@
 package app.ajay.ld43;
 
+import java.awt.event.MouseAdapter;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 public class Player {
 	float x, y;
@@ -58,6 +61,50 @@ public class Player {
 		x += xSpeed * game.deltaTime;
 		y += ySpeed * game.deltaTime;
 		
+		//check if on a platform again
+		currentPlatform = game.getPlatform(x, y, width, height);
+		
+		//collision detection
+		if (currentPlatform != null) {
+			//the amount of movement that happened in the last frame (xspeed and yspeed)
+			Vector2 lastFrameMovement = new Vector2(xSpeed, ySpeed).nor();
+			Vector2 distanceFromPlatform = game.getDistanceFromPlatform(x, y, width, height, currentPlatform);
+			
+			//find if x or y has the smallest distance
+			if (Math.abs(distanceFromPlatform.x) < Math.abs(distanceFromPlatform.y)) {
+				//the amount of movement needed to get out of the way of the platform (a multiplier of the speed
+				float amountOfMovementNeeded = distanceFromPlatform.x / lastFrameMovement.x;
+				
+				//the movement needed in pixels to get out of the way of the platform
+				Vector2 fixedMovement = new Vector2(distanceFromPlatform.x, lastFrameMovement.y * amountOfMovementNeeded);
+				
+				//move the position back to where it should be
+				x -= fixedMovement.x;
+				
+				//reset the speed because it just got blocked on the x movement
+				xSpeed = 0;
+			} else { 
+				//the amount of movement needed to get out of the way of the platform (a multiplier of the speed
+				float amountOfMovementNeeded = distanceFromPlatform.y / lastFrameMovement.y;
+				if (lastFrameMovement.y == 0) {
+					//can't divide by zero
+					amountOfMovementNeeded = 0;
+				}
+				
+				//the movement needed in pixels to get out of the way of the platform
+				Vector2 fixedMovement = new Vector2(lastFrameMovement.x * amountOfMovementNeeded, distanceFromPlatform.y);
+				
+				//move the position back to where it should be
+				y += fixedMovement.y;
+				
+				//reset the speed because it just got blocked on the y movement
+				ySpeed = 0;
+			}
+		}
+		
+		//update gravity for next frame
+		ySpeed -= gravity * game.deltaTime;
+		
 		//update friction for next frame
 		if (xSpeed > 0) {
 			xSpeed -= friction * game.deltaTime;
@@ -69,13 +116,6 @@ public class Player {
 			if (xSpeed > 0) { 
 				xSpeed = 0;
 			}
-		}
-		
-		//update gravity for next frame
-		ySpeed -= gravity * game.deltaTime;
-		if (currentPlatform!= null && y <= currentPlatform.y + currentPlatform.height && ySpeed < 0) {
-			ySpeed = 0;
-			y = currentPlatform.y + currentPlatform.height;
 		}
 		
 		//move camera
