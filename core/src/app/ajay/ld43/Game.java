@@ -3,6 +3,7 @@ package app.ajay.ld43;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Game {
 	
@@ -16,15 +17,21 @@ public class Game {
 	ArrayList<Platform> platforms = new ArrayList<Platform>();
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	
+	Texture platformImage;
+	
 	public Game(Main main) {
 		this.main = main;
 		
+		//setup images
+		platformImage = new Texture("player.png");
+		
 		player = new Player(0, 64);
 		
-		platforms.add(new Platform(0, 0, 2000, 64));
+		platforms.add(new Platform(0, 0, 800, 64));
 		platforms.add(new Platform(400, 150, 500, 64));
 		platforms.add(new Platform(1000, 300, 500, 64));
 		platforms.add(new Platform(1600, 450, 500, 64));
+		platforms.add(new Platform(2000, 0, 2000, 64));
 
 		enemies.add(new Enemy(400, 150 + 64, 400, 900 - 64, 200f));
 	}
