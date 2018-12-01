@@ -14,6 +14,7 @@ public class Game {
 	Player player;
 	
 	ArrayList<Platform> platforms = new ArrayList<Platform>();
+	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	
 	public Game(Main main) {
 		this.main = main;
@@ -25,6 +26,7 @@ public class Game {
 		platforms.add(new Platform(1000, 300, 500, 64));
 		platforms.add(new Platform(1600, 450, 500, 64));
 
+		enemies.add(new Enemy(400, 150 + 64, 400, 900 - 64, 200f));
 	}
 	
 	public void update() {
@@ -36,6 +38,10 @@ public class Game {
 		}
 		
 		player.update(this);
+		
+		for (Enemy enemy : enemies) {
+			enemy.update(this);
+		}
 	}
 	
 	public void render() {
@@ -43,6 +49,10 @@ public class Game {
 		
 		for (Platform platform : platforms) {
 			platform.render(main);
+		}
+		
+		for (Enemy enemy : enemies) {
+			enemy.render(main);
 		}
 	}
 	
