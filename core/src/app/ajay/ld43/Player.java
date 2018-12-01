@@ -46,7 +46,7 @@ public class Player {
 			xSpeed -= speed * game.deltaTime;
 		}
 		//jumping
-		if(Gdx.input.isKeyPressed(Keys.W) && currentPlatform != null) {
+		if(Gdx.input.isKeyPressed(Keys.W) && currentPlatform != null && ySpeed < 0) {
 			ySpeed = jumpSpeed;
 		}
 		
