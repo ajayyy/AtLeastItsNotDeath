@@ -27,6 +27,9 @@ public class Player {
 	float width = 64;
 	float height = 64;
 	
+	//becomes true when the player dies, but can be set to false again
+	boolean dead;
+	
 	public Player(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -35,6 +38,12 @@ public class Player {
 	}
 	
 	public void update(Game game) {
+		if (dead) return;
+		//check if dead
+		if (y + height < 0) {
+			dead = true;
+			return;
+		}
 		
 		//check if on a platform
 		Platform currentPlatform = game.getPlatform(x, y, width, height);

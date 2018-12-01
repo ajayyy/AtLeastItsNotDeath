@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 
@@ -21,8 +22,15 @@ public class Game {
 	
 	Texture platformImage;
 	
+	BitmapFont font;
+	
+	RevivalScreen revivalScreen;
+	
 	public Game(Main main) {
 		this.main = main;
+		
+		//load font
+		font = new BitmapFont(Gdx.files.internal("theshapeofthings.fnt"));
 		
 		//setup images
 		platformImage = new Texture("player.png");
@@ -36,6 +44,8 @@ public class Game {
 		platforms.add(new Platform(2000, 0, 2000, 64));
 
 		enemies.add(new Enemy(400, 150 + 64, 400, 900 - 64, 200f));
+		
+		revivalScreen = new RevivalScreen();
 	}
 	
 	public void update() {
@@ -62,6 +72,10 @@ public class Game {
 		
 		for (Enemy enemy : enemies) {
 			enemy.render(main);
+		}
+		
+		if (player.dead) {
+			revivalScreen.render(main);
 		}
 	}
 	

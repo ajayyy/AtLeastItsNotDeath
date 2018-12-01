@@ -5,9 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
+	ShapeRenderer shapeRenderer;
 	
 	Game game;
 	
@@ -16,6 +18,7 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer();
 		
 		game = new Game(this);
 		
@@ -40,6 +43,7 @@ public class Main extends ApplicationAdapter {
 		//update camera
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
+		shapeRenderer.setProjectionMatrix(cam.combined);
 		
 		//clear screen
 		Gdx.gl.glClearColor(0, 0, 0, 1);
