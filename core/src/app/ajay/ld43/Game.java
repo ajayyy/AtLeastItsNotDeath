@@ -1,5 +1,7 @@
 package app.ajay.ld43;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 
 public class Game {
@@ -11,10 +13,14 @@ public class Game {
 	
 	Player player;
 	
+	ArrayList<Platform> platforms = new ArrayList<Platform>();
+	
 	public Game(Main main) {
 		this.main = main;
 		
-		player = new Player(0, 0);
+		player = new Player(0, 64);
+		
+		platforms.add(new Platform(0, 0, 2000, 64));
 	}
 	
 	public void update() {
@@ -30,6 +36,10 @@ public class Game {
 	
 	public void render() {
 		player.render(main);
+		
+		for (Platform platform : platforms) {
+			platform.render(main);
+		}
 	}
 	
 	public void dispose() {

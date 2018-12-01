@@ -5,13 +5,13 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Player {
-	float x,y;
+	float x, y;
 	
 	//these are modified first, then cause x and y to get modified
 	float xSpeed, ySpeed;
 	
 	//the image of this player
-	Texture img;
+	Texture image;
 	
 	//the speed the player will accelerate by when moved
 	float speed = 1000f;
@@ -21,7 +21,7 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		
-		img = new Texture("player.png");
+		image = new Texture("player.png");
 	}
 	
 	public void update(Game game) {
@@ -58,12 +58,12 @@ public class Player {
 	public void render(Main main) {
 		main.batch.begin();
 		
-		main.batch.draw(img, x, y);
+		main.batch.draw(image, x, y);
 		
 		main.batch.end();
 	}
 	
 	public void dispose() {
-		img.dispose();
+		image.dispose();
 	}
 }
