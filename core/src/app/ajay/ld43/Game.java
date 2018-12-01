@@ -21,6 +21,7 @@ public class Game {
 		player = new Player(0, 64);
 		
 		platforms.add(new Platform(0, 0, 2000, 64));
+		platforms.add(new Platform(400, 150, 500, 64));
 	}
 	
 	public void update() {
@@ -44,5 +45,17 @@ public class Game {
 	
 	public void dispose() {
 		player.dispose();
+	}
+	
+	//checks if you are in a platform
+	public Platform getPlatform(float x, float y, float width, float height) {
+		for (Platform platform : platforms) {
+			if (x + width >= platform.x && x <= platform.x + platform.width &&
+					y + height >= platform.y && y <= platform.y + platform.height) {
+				return platform;
+			}
+		}
+		
+		return null;
 	}
 }

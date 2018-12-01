@@ -17,6 +17,12 @@ public class Player {
 	float speed = 1000f;
 	float maxSpeed = 500f;
 	
+	float gravity = 1000f;
+	float jumpSpeed = 600f;
+	
+	float width = 64;
+	float height = 64;
+	
 	public Player(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -26,16 +32,18 @@ public class Player {
 	
 	public void update(Game game) {
 		
+		//check if on a platform
+		Platform currentPlatform = game.getPlatform(x, y, width, height);
+		
 		//handle input
-		if(Gdx.input.isKeyPressed(Keys.W)) {
-			ySpeed += speed * game.deltaTime;
-		} else if(Gdx.input.isKeyPressed(Keys.S)) {
-			ySpeed -= speed * game.deltaTime;
-		}
 		if(Gdx.input.isKeyPressed(Keys.D)) {
 			xSpeed += speed * game.deltaTime;
 		} else if(Gdx.input.isKeyPressed(Keys.A)) {
 			xSpeed -= speed * game.deltaTime;
+		}
+		//jumping
+		if(Gdx.input.isKeyPressed(Keys.W) && currentPlatform != null) {
+			ySpeed = jumpSpeed;
 		}
 		
 		//handle max speeds
@@ -44,10 +52,12 @@ public class Player {
 		} else if (xSpeed <= -maxSpeed) {
 			xSpeed = -maxSpeed;
 		}
-		if (ySpeed >= maxSpeed) {
-			ySpeed = maxSpeed;
-		} else if (ySpeed <= -maxSpeed) {
-			ySpeed = -maxSpeed;
+		
+		//gravity
+		ySpeed -= gravity * game.deltaTime;
+		if (currentPlatform!= null && y < currentPlatform.y + currentPlatform.height) {
+			ySpeed = 0;
+			y = currentPlatform.y + currentPlatform.height;
 		}
 		
 		//update position
@@ -58,7 +68,7 @@ public class Player {
 	public void render(Main main) {
 		main.batch.begin();
 		
-		main.batch.draw(image, x, y);
+		main.batch.draw(image, x, y, width, height);
 		
 		main.batch.end();
 	}
