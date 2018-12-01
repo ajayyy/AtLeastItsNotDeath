@@ -22,6 +22,9 @@ public class Game {
 		
 		platforms.add(new Platform(0, 0, 2000, 64));
 		platforms.add(new Platform(400, 150, 500, 64));
+		platforms.add(new Platform(1000, 300, 500, 64));
+		platforms.add(new Platform(1600, 450, 500, 64));
+
 	}
 	
 	public void update() {

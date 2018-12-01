@@ -77,6 +77,20 @@ public class Player {
 			ySpeed = 0;
 			y = currentPlatform.y + currentPlatform.height;
 		}
+		
+		//move camera
+		float lerp = 2.5f;
+		float xMovement = ((x - game.main.cam.position.x) * lerp * game.deltaTime);
+		float targetY = y;
+		//only move to it if the y is over half the screen, otherwise the camera would look below the ground
+		if (y < Gdx.graphics.getHeight() / 2f) {
+			targetY = Gdx.graphics.getHeight() / 2f;
+		}
+		float yMovement = ((targetY - game.main.cam.position.y) * lerp * game.deltaTime);
+		
+		game.main.cam.position.x += xMovement;
+		game.main.cam.position.y += yMovement;
+		
 	}
 	
 	public void render(Main main) {
