@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 
 public class Game {
@@ -31,6 +31,7 @@ public class Game {
 		
 		//load font
 		font = new BitmapFont(Gdx.files.internal("theshapeofthings.fnt"));
+		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		//setup images
 		platformImage = new Texture("player.png");
