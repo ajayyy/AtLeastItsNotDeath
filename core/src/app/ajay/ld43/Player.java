@@ -54,7 +54,11 @@ public class Player {
 			xSpeed = -maxSpeed;
 		}
 		
-		//friction
+		//update position
+		x += xSpeed * game.deltaTime;
+		y += ySpeed * game.deltaTime;
+		
+		//update friction for next frame
 		if (xSpeed > 0) {
 			xSpeed -= friction * game.deltaTime;
 			if (xSpeed < 0) { 
@@ -67,16 +71,12 @@ public class Player {
 			}
 		}
 		
-		//gravity
+		//update gravity for next frame
 		ySpeed -= gravity * game.deltaTime;
-		if (currentPlatform!= null && y < currentPlatform.y + currentPlatform.height) {
+		if (currentPlatform!= null && y <= currentPlatform.y + currentPlatform.height && ySpeed < 0) {
 			ySpeed = 0;
 			y = currentPlatform.y + currentPlatform.height;
 		}
-		
-		//update position
-		x += xSpeed * game.deltaTime;
-		y += ySpeed * game.deltaTime;
 	}
 	
 	public void render(Main main) {
