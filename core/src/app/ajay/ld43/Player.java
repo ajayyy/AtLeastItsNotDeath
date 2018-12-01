@@ -19,6 +19,7 @@ public class Player {
 	
 	float gravity = 1000f;
 	float jumpSpeed = 600f;
+	float friction = 500f;
 	
 	float width = 64;
 	float height = 64;
@@ -51,6 +52,19 @@ public class Player {
 			xSpeed = maxSpeed;
 		} else if (xSpeed <= -maxSpeed) {
 			xSpeed = -maxSpeed;
+		}
+		
+		//friction
+		if (xSpeed > 0) {
+			xSpeed -= friction * game.deltaTime;
+			if (xSpeed < 0) { 
+				xSpeed = 0;
+			}
+		} else if (xSpeed < 0) {
+			xSpeed += friction * game.deltaTime;
+			if (xSpeed > 0) { 
+				xSpeed = 0;
+			}
 		}
 		
 		//gravity
