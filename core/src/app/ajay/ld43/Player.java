@@ -44,6 +44,12 @@ public class Player {
 	//called by a powerdown, makes the player less visible
 	boolean translucent;
 	
+	//fades in and out, powerdown
+	boolean fading;
+	//if it is fading up or down
+	boolean fadingUp;
+	float currentFade = 0.2f;
+	
 	Random random = new Random();
 	
 	public Player(float x, float y) {
@@ -151,7 +157,7 @@ public class Player {
 		float xMovement = ((x - game.main.cam.position.x) * lerp * game.deltaTime);
 		float targetY = y;
 		//only move to it if the y is over half the screen, otherwise the camera would look below the ground
-		if (y < Gdx.graphics.getHeight() / 2f) {
+		if (y < Gdx.graphics.getHeight() / 2f && !game.revivalScreen.zoomed) {
 			targetY = Gdx.graphics.getHeight() / 2f;
 		}
 		float yMovement = ((targetY - game.main.cam.position.y) * lerp * game.deltaTime);
@@ -175,9 +181,28 @@ public class Player {
 			main.batch.setColor(color.r, color.g, color.b, 0.2f);
 		}
 		
+		if (fading) {
+			Color color = main.batch.getColor();
+			main.batch.setColor(color.r, color.g, color.b, currentFade);
+			
+			if (fadingUp) {
+				currentFade += 0.1f * main.game.deltaTime;
+				if (currentFade >= 0.2f) {
+					currentFade = 0.2f;
+					fadingUp = false;
+				}
+			} else {
+				currentFade -= 0.1f * main.game.deltaTime;
+				if (currentFade <= 0f) {
+					currentFade = 0;
+					fadingUp = true;
+				}
+			}
+		}
+		
 		main.batch.draw(image, x, y, width, height);
 		
-		if (translucent) {
+		if (translucent || fading) {
 			Color color = main.batch.getColor();
 			main.batch.setColor(color.r, color.g, color.b, 1f);
 		}

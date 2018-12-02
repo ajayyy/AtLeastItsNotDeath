@@ -38,16 +38,20 @@ public class RevivalScreen {
 	float targetRotation = -1;
 	float currentRotation = 0;
 	
+	boolean zoomed;
+	
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
 //		powerUps.add(new Power(0));
 //		powerUps.add(new Power(1));
 //		powerUps.add(new Power(2));
-		powerUps.add(new Power(3));
+//		powerUps.add(new Power(3));
 //		powerUps.add(new Power(4));
 //		powerUps.add(new Power(5));
-		powerUps.add(new Power(6));
+//		powerUps.add(new Power(6));
+		powerUps.add(new Power(7));
+		powerUps.add(new Power(8));
 		
 		powerDowns.add(new Power(0));
 	}

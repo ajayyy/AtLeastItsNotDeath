@@ -1,5 +1,6 @@
 package app.ajay.ld43;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -55,6 +56,16 @@ public class Power {
 			description = "Random Rotation";
 			icon = new Texture("player.png");
 			break;
+		case 7:
+			positive = false;
+			description = "Fading Player";
+			icon = new Texture("player.png");
+			break;
+		case 8:
+			positive = false;
+			description = "Zoomed In";
+			icon = new Texture("player.png");
+			break;
 		}
 	}
 	
@@ -82,6 +93,15 @@ public class Power {
 		case 6:
 			game.revivalScreen.randomRotation = true;
 			break;
+		case 7:
+			game.player.fading = true;
+			break;
+		case 8:
+			game.main.cam.viewportWidth = Gdx.graphics.getWidth() / 2f;
+			game.main.cam.viewportHeight = Gdx.graphics.getHeight() / 2f;
+			game.main.cam.update();
+			game.revivalScreen.zoomed = true;
+			break;
 		}
 	}
 	
@@ -108,6 +128,15 @@ public class Power {
 			break;
 		case 6:
 			game.revivalScreen.randomRotation = false;
+			break;
+		case 7:
+			game.player.fading = false;
+			break;
+		case 8:
+			game.main.cam.viewportWidth = Gdx.graphics.getWidth();
+			game.main.cam.viewportHeight = Gdx.graphics.getHeight();
+			game.main.cam.update();
+			game.revivalScreen.zoomed = false;
 			break;
 		}
 	}

@@ -32,6 +32,12 @@ public class Main extends ApplicationAdapter {
 	public void resize(int width, int height) {
 		cam.viewportWidth = width;
 		cam.viewportHeight = height;
+		
+		if (game.revivalScreen.zoomed) {
+			cam.viewportWidth = width / 2f;
+			cam.viewportHeight = height / 2f;
+		}
+		
 		cam.update();
 	}
 
