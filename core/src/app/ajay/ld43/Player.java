@@ -42,6 +42,7 @@ public class Player {
 		//check if dead
 		if (y + height < 0) {
 			dead = true;
+			game.died();
 			return;
 		}
 		

@@ -80,6 +80,11 @@ public class Game {
 		}
 	}
 	
+	//called when the player dies
+	public void died() {
+		revivalScreen.chooseOptions();
+	}
+	
 	public void dispose() {
 		player.dispose();
 	}
