@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -23,14 +24,18 @@ public class RevivalScreen {
 	Power[] powerUpOptions = new Power[2];
 	Power[][] powerDownOptions = new Power[2][2];
 	
+	//this will be set with any currently active powerups, null if none
+	Power currentPowerUp;
+	Power[] currentPowerDowns = new Power[2];
+	
 	Random random = new Random();
 	
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
-		powerUps.add(new Power(true, "5 times more speed", new Texture("player.png")));
+		powerUps.add(new Power(0));
 		
-		powerDowns.add(new Power(false, "Increased gravity", new Texture("player.png")));
+		powerDowns.add(new Power(0));
 	}
 	
 	public void chooseOptions() {
@@ -45,7 +50,32 @@ public class RevivalScreen {
 	}
 	
 	public void update(Game game) {
+		if (Gdx.input.isKeyPressed(Keys.A)) {
+			revive(game, 0);
+		} else if (Gdx.input.isKeyPressed(Keys.D)) {
+			revive(game, 1);
+		}
+	}
+	
+	public void revive(Game game, int side) {
+		if (currentPowerUp != null) {
+			currentPowerUp.dispose(game);
+		}
+		if (currentPowerDowns[0] != null) {
+			currentPowerDowns[0].dispose(game);
+		}
+		if (currentPowerDowns[1] != null) {
+			currentPowerDowns[1].dispose(game);
+		}
 		
+		currentPowerUp = powerUpOptions[side];
+		currentPowerUp.use(game);
+		currentPowerDowns[0] = powerDownOptions[side][0];
+		currentPowerDowns[0].use(game);
+		currentPowerDowns[1] = powerDownOptions[side][1];
+		currentPowerDowns[1].use(game);
+		
+		game.player.revive();
 	}
 	
 	public void render(Main main) {
@@ -61,6 +91,18 @@ public class RevivalScreen {
 		main.game.font.getData().setScale(0.6f);
 		layout.setText(main.game.font, message);
 		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 100, 0));
+		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
+		
+		message = "This will replace any current effects";
+		main.game.font.getData().setScale(0.3f);
+		layout.setText(main.game.font, message);
+		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 150, 0));
+		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
+		
+		message = "OR";
+		main.game.font.getData().setScale(1f);
+		layout.setText(main.game.font, message);
+		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 300, 0));
 		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
 		
 		main.batch.end();

@@ -1,5 +1,6 @@
 package app.ajay.ld43;
 
+import java.awt.datatransfer.FlavorTable;
 import java.awt.event.MouseAdapter;
 
 import com.badlogic.gdx.Gdx;
@@ -8,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
+	//for resetting back to the start when needed
+	float startX, startY;
 	float x, y;
 	
 	//these are modified first, then cause x and y to get modified
@@ -17,8 +20,10 @@ public class Player {
 	Texture image;
 	
 	//the speed the player will accelerate by when moved
-	float speed = 1000f;
-	float maxSpeed = 500f;
+	float defaultSpeed = 1000f;
+	float speed = defaultSpeed;
+	float defaultMaxSpeed = 500f;
+	float maxSpeed = defaultMaxSpeed;
 	
 	float gravity = 1000f;
 	float jumpSpeed = 600f;
@@ -31,6 +36,8 @@ public class Player {
 	boolean dead;
 	
 	public Player(float x, float y) {
+		startX = x;
+		startY = y;
 		this.x = x;
 		this.y = y;
 		
@@ -149,6 +156,16 @@ public class Player {
 		main.batch.draw(image, x, y, width, height);
 		
 		main.batch.end();
+	}
+	
+	public void revive() {
+		dead = false;
+		
+		x = startX;
+		y = startY;
+		
+		xSpeed = 0;
+		ySpeed = 0;
 	}
 	
 	public void dispose() {

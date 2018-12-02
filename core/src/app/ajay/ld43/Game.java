@@ -62,6 +62,10 @@ public class Game {
 		for (Enemy enemy : enemies) {
 			enemy.update(this);
 		}
+		
+		if (player.dead) {
+			revivalScreen.update(this);
+		}
 	}
 	
 	public void render() {
