@@ -87,6 +87,7 @@ public class Game {
 	//called when the player dies
 	public void died() {
 		revivalScreen.chooseOptions();
+		revivalScreen.disposeOld(this);
 	}
 	
 	public void dispose() {

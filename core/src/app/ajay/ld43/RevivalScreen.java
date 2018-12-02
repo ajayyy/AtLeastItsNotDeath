@@ -33,7 +33,7 @@ public class RevivalScreen {
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
-		powerUps.add(new Power(0));
+		powerUps.add(new Power(3));
 		
 		powerDowns.add(new Power(0));
 	}
@@ -50,14 +50,14 @@ public class RevivalScreen {
 	}
 	
 	public void update(Game game) {
-		if (Gdx.input.isKeyPressed(Keys.A)) {
+		if (Gdx.input.isKeyJustPressed(Keys.A)) {
 			revive(game, 0);
-		} else if (Gdx.input.isKeyPressed(Keys.D)) {
+		} else if (Gdx.input.isKeyJustPressed(Keys.D)) {
 			revive(game, 1);
 		}
 	}
 	
-	public void revive(Game game, int side) {
+	public void disposeOld(Game game) {
 		if (currentPowerUp != null) {
 			currentPowerUp.dispose(game);
 		}
@@ -67,7 +67,9 @@ public class RevivalScreen {
 		if (currentPowerDowns[1] != null) {
 			currentPowerDowns[1].dispose(game);
 		}
-		
+	}
+	
+	public void revive(Game game, int side) {
 		currentPowerUp = powerUpOptions[side];
 		currentPowerUp.use(game);
 		currentPowerDowns[0] = powerDownOptions[side][0];
