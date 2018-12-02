@@ -91,6 +91,11 @@ public class Power {
 			description = "Faster Enemies";
 			icon = new Texture("playerSpeed.png");
 			break;
+		case 14:
+			positive = true;
+			description = "Make player smaller";
+			icon = new Texture("screenShake.png");
+			break;
 		}
 	}
 	
@@ -144,6 +149,10 @@ public class Power {
 			break;
 		case 13:
 			game.enemySpeed = game.defaultEnemySpeed * 2.5f;
+			break;
+		case 14:
+			game.player.width = game.player.defaultWidth / 2f;
+			game.player.height = game.player.defaultHeight / 2f;
 			break;
 		}
 	}
@@ -201,6 +210,10 @@ public class Power {
 			break;
 		case 13:
 			game.enemySpeed = game.defaultEnemySpeed;
+			break;
+		case 14:
+			game.player.width = game.player.defaultWidth;
+			game.player.height = game.player.defaultHeight;
 			break;
 		}
 	}

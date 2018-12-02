@@ -41,7 +41,7 @@ public class Game {
 		
 		player = new Player(0, 64);
 		
-		platforms.add(new Platform(0, 0, 800, 64));
+		platforms.add(new Platform(-100, 0, 900, 64));
 		platforms.add(new Platform(400, 200, 500, 64));
 		enemies.add(new Enemy(400, 200 + 64, 400, 900 - 64, 1f));
 		platforms.add(new Platform(1500, 100, 500, 64));

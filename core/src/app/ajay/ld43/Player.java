@@ -33,8 +33,10 @@ public class Player {
 	float jumpSpeed = defaultJumpSpeed;
 	float friction = 500f;
 	
-	float width = 64;
-	float height = 64;
+	float defaultWidth = 64;
+	float defaultHeight = 64;
+	float width = defaultWidth;
+	float height = defaultHeight;
 	
 	//becomes true when the player dies, but can be set to false again
 	boolean dead;

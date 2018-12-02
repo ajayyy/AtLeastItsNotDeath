@@ -1,11 +1,15 @@
 package app.ajay.ld43;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.bitfire.postprocessing.PostProcessor;
+import com.bitfire.postprocessing.effects.Bloom;
+import com.bitfire.utils.ShaderLoader;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -15,8 +19,18 @@ public class Main extends ApplicationAdapter {
 	
 	OrthographicCamera cam;
 	
+	PostProcessor postProcessor;
+	Bloom bloom;
+	
 	@Override
 	public void create () {
+		
+		//Add bloom effect
+		ShaderLoader.BasePath = "shaders/";
+        postProcessor = new PostProcessor(false, false, Gdx.app.getType() == ApplicationType.Desktop);
+        bloom = new Bloom((int) (Gdx.graphics.getWidth() * 0.25f), (int) (Gdx.graphics.getHeight() * 0.25f));
+        postProcessor.addEffect( bloom );
+		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		
@@ -56,22 +70,34 @@ public class Main extends ApplicationAdapter {
 		//update all objects
 		game.update();
 		
+		//setup post processing
+		postProcessor.capture();
+		
 		//update camera
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		
 		//clear screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		//render all objects
 		game.render();
+		
+		//render the result
+        postProcessor.render();
 	}
+	
+	@Override
+    public void resume() {
+        postProcessor.rebind();
+    }
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		game.dispose();
+		postProcessor.dispose();
 	}
 }

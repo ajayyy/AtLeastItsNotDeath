@@ -48,20 +48,21 @@ public class RevivalScreen {
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
-		powerUps.add(new Power(0));
-		powerUps.add(new Power(1));
-		powerUps.add(new Power(2));
-		powerUps.add(new Power(3));
-		powerUps.add(new Power(4));
-		powerUps.add(new Power(5));
-		powerUps.add(new Power(6));
-		powerUps.add(new Power(7));
-		powerUps.add(new Power(8));
-		powerUps.add(new Power(9));
-		powerUps.add(new Power(10));
-		powerUps.add(new Power(11));
-		powerUps.add(new Power(12));
-		powerUps.add(new Power(13));
+//		powerUps.add(new Power(0));
+//		powerUps.add(new Power(1));
+//		powerUps.add(new Power(2));
+//		powerUps.add(new Power(3));
+//		powerUps.add(new Power(4));
+//		powerUps.add(new Power(5));
+//		powerUps.add(new Power(6));
+//		powerUps.add(new Power(7));
+//		powerUps.add(new Power(8));
+//		powerUps.add(new Power(9));
+//		powerUps.add(new Power(10));
+//		powerUps.add(new Power(11));
+//		powerUps.add(new Power(12));
+//		powerUps.add(new Power(13));
+		powerUps.add(new Power(14));
 		
 		powerDowns.add(new Power(0));
 	}
