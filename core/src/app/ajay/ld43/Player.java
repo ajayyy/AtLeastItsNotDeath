@@ -27,7 +27,8 @@ public class Player {
 	float defaultMaxSpeed = 500f;
 	float maxSpeed = defaultMaxSpeed;
 	
-	float gravity = 1000f;
+	float defaultGravity = 1000f;
+	float gravity = defaultGravity;
 	float defaultJumpSpeed = 600f;
 	float jumpSpeed = defaultJumpSpeed;
 	float friction = 500f;

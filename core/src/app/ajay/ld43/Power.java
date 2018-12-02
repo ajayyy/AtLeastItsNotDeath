@@ -76,6 +76,11 @@ public class Power {
 			description = "More visibilty";
 			icon = new Texture("player.png");
 			break;
+		case 11:
+			positive = true;
+			description = "Moon gravity";
+			icon = new Texture("player.png");
+			break;
 		}
 	}
 	
@@ -120,6 +125,9 @@ public class Power {
 			game.main.cam.viewportHeight = Gdx.graphics.getHeight() * 2f;
 			game.main.cam.update();
 			game.revivalScreen.zoomedOut = true;
+			break;
+		case 11:
+			game.player.gravity = game.player.defaultGravity * 0.5f;
 			break;
 		}
 	}
@@ -168,6 +176,9 @@ public class Power {
 			game.main.cam.viewportHeight = Gdx.graphics.getHeight();
 			game.main.cam.update();
 			game.revivalScreen.zoomedOut = false;
+			break;
+		case 11:
+			game.player.gravity = game.player.defaultGravity;
 			break;
 		}
 	}
