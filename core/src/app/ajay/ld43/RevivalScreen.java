@@ -38,7 +38,12 @@ public class RevivalScreen {
 	float targetRotation = -1;
 	float currentRotation = 0;
 	
-	boolean zoomed;
+	boolean zoomedIn;
+	boolean zoomedOut;
+	
+	boolean randomZoom;
+	float targetZoom = -1;
+	float currentZoom = 1;
 	
 	public RevivalScreen() {
 		layout = new GlyphLayout();
@@ -50,8 +55,10 @@ public class RevivalScreen {
 //		powerUps.add(new Power(4));
 //		powerUps.add(new Power(5));
 //		powerUps.add(new Power(6));
-		powerUps.add(new Power(7));
-		powerUps.add(new Power(8));
+//		powerUps.add(new Power(7));
+//		powerUps.add(new Power(8));
+//		powerUps.add(new Power(9));
+		powerUps.add(new Power(10));
 		
 		powerDowns.add(new Power(0));
 	}
@@ -111,6 +118,29 @@ public class RevivalScreen {
 				game.main.cam.rotate(rotation);
 				currentRotation += rotation;
 				targetRotation = -1;
+			}
+		}
+		
+		if (randomZoom) {
+			//no target had been chosen yet
+			if (targetZoom == -1) {
+				//choose a target rotation
+				targetZoom = random.nextFloat() * 2.5f + 0.2f;
+			}
+			
+			//go towards that target rotation
+			float lerp = 1.1f;
+			float zoom = ((targetZoom - currentZoom) * lerp * game.deltaTime);
+			
+			currentZoom += zoom;
+			
+			game.main.cam.viewportWidth = Gdx.graphics.getWidth() * currentZoom;
+			game.main.cam.viewportHeight = Gdx.graphics.getHeight() * currentZoom;
+			game.main.cam.update();
+			
+			if (Math.abs(currentZoom - targetZoom) < 0.05f) {
+				//choose a new target next frame, close enough to target
+				targetZoom = -1f;
 			}
 		}
 	}

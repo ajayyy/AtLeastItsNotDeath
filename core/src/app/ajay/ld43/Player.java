@@ -157,8 +157,8 @@ public class Player {
 		float xMovement = ((x - game.main.cam.position.x) * lerp * game.deltaTime);
 		float targetY = y;
 		//only move to it if the y is over half the screen, otherwise the camera would look below the ground
-		if (y < Gdx.graphics.getHeight() / 2f && !game.revivalScreen.zoomed) {
-			targetY = Gdx.graphics.getHeight() / 2f;
+		if (y < game.main.cam.viewportHeight / 2f && !game.revivalScreen.zoomedIn && !game.revivalScreen.randomZoom) {
+			targetY = game.main.cam.viewportHeight / 2f;
 		}
 		float yMovement = ((targetY - game.main.cam.position.y) * lerp * game.deltaTime);
 		

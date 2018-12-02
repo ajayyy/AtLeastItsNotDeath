@@ -33,9 +33,19 @@ public class Main extends ApplicationAdapter {
 		cam.viewportWidth = width;
 		cam.viewportHeight = height;
 		
-		if (game.revivalScreen.zoomed) {
+		if (game.revivalScreen.zoomedIn) {
 			cam.viewportWidth = width / 2f;
 			cam.viewportHeight = height / 2f;
+		}
+		
+		if (game.revivalScreen.zoomedOut) {
+			cam.viewportWidth = width * 2f;
+			cam.viewportHeight = height * 2f;
+		}
+		
+		if (game.revivalScreen.randomZoom) {
+			cam.viewportWidth = width / game.revivalScreen.currentZoom;
+			cam.viewportHeight = height / game.revivalScreen.currentZoom;
 		}
 		
 		cam.update();
