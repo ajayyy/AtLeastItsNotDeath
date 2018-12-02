@@ -50,6 +50,11 @@ public class Power {
 			description = "Invisible Player";
 			icon = new Texture("player.png");
 			break;
+		case 6:
+			positive = false;
+			description = "Random Rotation";
+			icon = new Texture("player.png");
+			break;
 		}
 	}
 	
@@ -74,6 +79,9 @@ public class Power {
 		case 5:
 			game.player.translucent = true;
 			break;
+		case 6:
+			game.revivalScreen.randomRotation = true;
+			break;
 		}
 	}
 	
@@ -97,6 +105,9 @@ public class Power {
 			break;
 		case 5:
 			game.player.translucent = false;
+			break;
+		case 6:
+			game.revivalScreen.randomRotation = false;
 			break;
 		}
 	}

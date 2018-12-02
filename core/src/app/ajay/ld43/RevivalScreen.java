@@ -33,6 +33,9 @@ public class RevivalScreen {
 	
 	//for handling rotating upside down
 	boolean upsideDown;
+	//for handling random rotation power down
+	boolean randomRotation;
+	float targetRotation = -1;
 	float currentRotation = 0;
 	
 	public RevivalScreen() {
@@ -44,6 +47,7 @@ public class RevivalScreen {
 		powerUps.add(new Power(3));
 //		powerUps.add(new Power(4));
 //		powerUps.add(new Power(5));
+		powerUps.add(new Power(6));
 		
 		powerDowns.add(new Power(0));
 	}
@@ -77,6 +81,24 @@ public class RevivalScreen {
 				game.main.cam.rotate(rotation);
 				currentRotation += rotation;
 			}
+		} else if(randomRotation) {
+			//no target had been chosen yet
+			if (targetRotation == -1) {
+				//choose a target rotation
+				targetRotation = random.nextFloat() * 360;
+			}
+			
+			//go towards that target rotation
+			float lerp = 1.1f;
+			float rotation = ((targetRotation - currentRotation) * lerp * game.deltaTime);
+			
+			game.main.cam.rotate(rotation);
+			currentRotation += rotation;
+			
+			if (Math.abs(currentRotation - targetRotation) < 10) {
+				//choose a new target next frame, close enough to target
+				targetRotation = -1f;
+			}
 		} else {
 			if (currentRotation > 0) {
 				float lerp = 4f;
@@ -84,6 +106,7 @@ public class RevivalScreen {
 				
 				game.main.cam.rotate(rotation);
 				currentRotation += rotation;
+				targetRotation = -1;
 			}
 		}
 	}
