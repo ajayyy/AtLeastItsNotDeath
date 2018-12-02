@@ -69,42 +69,44 @@ public class RevivalScreen {
 		
 		//draw the rectangles that will hold the icons
 		//option 0, good
-		Vector3 shapePosition = main.cam.unproject(new Vector3(100, 200, 0));
+		Vector3 option0Position = main.cam.unproject(new Vector3(100, 200, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, 400, -400);
-		main.shapeRenderer.end();
-		//draw option
-		main.batch.begin();
-		main.batch.draw(powerUpOptions[0].icon, shapePosition.x + 75, shapePosition.y - 275, 250, 250);
-		main.batch.end();
+		main.shapeRenderer.rect(option0Position.x, option0Position.y, 400, -400);
 		
 		//option 0, bad 0
-		main.shapeRenderer.begin(ShapeType.Filled);
-		shapePosition = main.cam.unproject(new Vector3(100 + 20, 620, 0));
+		Vector3 option0Bad0Position = main.cam.unproject(new Vector3(100 + 20, 620, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, 170, -170);
+		main.shapeRenderer.rect(option0Bad0Position.x, option0Bad0Position.y, 170, -170);
 		
 		//option 0, bad 1
-		shapePosition = main.cam.unproject(new Vector3(100 + 170 + 20*2, 620, 0));
+		Vector3 option0Bad1Position = main.cam.unproject(new Vector3(100 + 170 + 20*2, 620, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, 170, -170);
+		main.shapeRenderer.rect(option0Bad1Position.x, option0Bad1Position.y, 170, -170);
 		
 		
 		//option 1, good
-		shapePosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - 100, 200, 0));
+		Vector3 option1Position = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - 100, 200, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, -400, -400);
+		main.shapeRenderer.rect(option1Position.x, option1Position.y, -400, -400);
 		
 		//option 0, bad 0
-		shapePosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - (100 + 20), 620, 0));
+		Vector3 option1Bad0Position = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - (100 + 20), 620, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, -170, -170);
+		main.shapeRenderer.rect(option1Bad0Position.x, option1Bad0Position.y, -170, -170);
 		
 		//option 0, bad 1
-		shapePosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - (100 + 170 + 20*2), 620, 0));
+		Vector3 option1Bad1Position = main.cam.unproject(new Vector3(Gdx.graphics.getWidth() - (100 + 170 + 20*2), 620, 0));
 		main.shapeRenderer.setColor(Color.GRAY);
-		main.shapeRenderer.rect(shapePosition.x, shapePosition.y, -170, -170);
+		main.shapeRenderer.rect(option1Bad1Position.x, option1Bad1Position.y, -170, -170);
 		
 		main.shapeRenderer.end();
+		
+		//draw options
+		main.batch.begin();
+		
+		main.batch.draw(powerUpOptions[0].icon, option0Position.x + 75, option0Position.y - 275, 250, 250);
+		
+		
+		main.batch.end();
 	}
 }
