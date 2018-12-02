@@ -37,7 +37,7 @@ public class Game {
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		//setup images
-		platformImage = new Texture("player.png");
+		platformImage = new Texture("platform.png");
 		
 		player = new Player(0, 64);
 		

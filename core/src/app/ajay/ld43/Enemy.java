@@ -31,7 +31,7 @@ public class Enemy {
 
 		this.movementSpeed = movementSpeed;
 		
-		image = new Texture("player.png");
+		image = new Texture("enemy.png");
 	}
 	
 	public void update(Game game) {
