@@ -26,6 +26,9 @@ public class Game {
 	
 	RevivalScreen revivalScreen;
 	
+	float defaultEnemySpeed = 200f;
+	float enemySpeed = defaultEnemySpeed;
+	
 	public Game(Main main) {
 		this.main = main;
 		
@@ -44,7 +47,7 @@ public class Game {
 		platforms.add(new Platform(1600, 450, 500, 64));
 		platforms.add(new Platform(2000, 0, 2000, 64));
 
-		enemies.add(new Enemy(400, 150 + 64, 400, 900 - 64, 200f));
+		enemies.add(new Enemy(400, 150 + 64, 400, 900 - 64, 1f));
 		
 		revivalScreen = new RevivalScreen();
 	}

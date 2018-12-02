@@ -13,6 +13,7 @@ public class Enemy {
 	//for the path movement of the enemy
 	float startX, targetX;
 	
+	//multiplier for the enemy speed in Game
 	float movementSpeed;
 	
 	Texture image;
@@ -35,14 +36,14 @@ public class Enemy {
 	
 	public void update(Game game) {
 		if (!flip) {
-			x += movementSpeed * game.deltaTime;
+			x += movementSpeed * game.enemySpeed * game.deltaTime;
 			
 			if (x >= targetX) {
 				x = targetX;
 				flip = true;
 			}
 		} else {
-			x -= movementSpeed * game.deltaTime;
+			x -= movementSpeed * game.enemySpeed * game.deltaTime;
 			
 			if (x <= startX) {
 				x = startX;

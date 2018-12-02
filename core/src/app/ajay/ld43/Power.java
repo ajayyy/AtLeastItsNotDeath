@@ -81,6 +81,16 @@ public class Power {
 			description = "Moon gravity";
 			icon = new Texture("player.png");
 			break;
+		case 12:
+			positive = true;
+			description = "Slower Enemies";
+			icon = new Texture("player.png");
+			break;
+		case 13:
+			positive = false;
+			description = "Faster Enemies";
+			icon = new Texture("player.png");
+			break;
 		}
 	}
 	
@@ -128,6 +138,12 @@ public class Power {
 			break;
 		case 11:
 			game.player.gravity = game.player.defaultGravity * 0.5f;
+			break;
+		case 12:
+			game.enemySpeed = game.defaultEnemySpeed * 0.25f;
+			break;
+		case 13:
+			game.enemySpeed = game.defaultEnemySpeed * 2.5f;
 			break;
 		}
 	}
@@ -179,6 +195,12 @@ public class Power {
 			break;
 		case 11:
 			game.player.gravity = game.player.defaultGravity;
+			break;
+		case 12:
+			game.enemySpeed = game.defaultEnemySpeed;
+			break;
+		case 13:
+			game.enemySpeed = game.defaultEnemySpeed;
 			break;
 		}
 	}
