@@ -40,6 +40,16 @@ public class Power {
 			description = "Upside down screen";
 			icon = new Texture("player.png");
 			break;
+		case 4:
+			positive = false;
+			description = "Screen Shake";
+			icon = new Texture("player.png");
+			break;
+		case 5:
+			positive = false;
+			description = "Invisible Player";
+			icon = new Texture("player.png");
+			break;
 		}
 	}
 	
@@ -56,7 +66,13 @@ public class Power {
 			game.player.jumpSpeed = game.player.defaultJumpSpeed * 1.5f;
 			break;
 		case 3:
-			game.main.cam.rotate(180);
+			game.revivalScreen.upsideDown = true;
+			break;
+		case 4:
+			game.player.screenshake = true;
+			break;
+		case 5:
+			game.player.translucent = true;
 			break;
 		}
 	}
@@ -74,7 +90,13 @@ public class Power {
 			game.player.jumpSpeed = game.player.defaultJumpSpeed;
 			break;
 		case 3:
-			game.main.cam.rotate(-180);
+			game.revivalScreen.upsideDown = false;
+			break;
+		case 4:
+			game.player.screenshake = false;
+			break;
+		case 5:
+			game.player.translucent = false;
 			break;
 		}
 	}

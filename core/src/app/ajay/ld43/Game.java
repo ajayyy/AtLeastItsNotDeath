@@ -66,6 +66,8 @@ public class Game {
 		if (player.dead) {
 			revivalScreen.update(this);
 		}
+		//always call this
+		revivalScreen.constantUpdate(this);
 	}
 	
 	public void render() {

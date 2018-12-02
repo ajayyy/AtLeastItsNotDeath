@@ -2,9 +2,11 @@ package app.ajay.ld43;
 
 import java.awt.datatransfer.FlavorTable;
 import java.awt.event.MouseAdapter;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -35,6 +37,14 @@ public class Player {
 	
 	//becomes true when the player dies, but can be set to false again
 	boolean dead;
+	
+	//if screenshake is currently enabled
+	boolean screenshake;
+	
+	//called by a powerdown, makes the player less visible
+	boolean translucent;
+	
+	Random random = new Random();
 	
 	public Player(float x, float y) {
 		startX = x;
@@ -146,6 +156,12 @@ public class Player {
 		}
 		float yMovement = ((targetY - game.main.cam.position.y) * lerp * game.deltaTime);
 		
+		if (screenshake) {
+			//randomly adjust xmovement and ymovement a bit
+			xMovement += random.nextFloat()*20 - 10;
+			yMovement += random.nextFloat()*20 - 10;
+		}
+
 		game.main.cam.position.x += xMovement;
 		game.main.cam.position.y += yMovement;
 		
@@ -154,7 +170,17 @@ public class Player {
 	public void render(Main main) {
 		main.batch.begin();
 		
+		if (translucent) {
+			Color color = main.batch.getColor();
+			main.batch.setColor(color.r, color.g, color.b, 0.2f);
+		}
+		
 		main.batch.draw(image, x, y, width, height);
+		
+		if (translucent) {
+			Color color = main.batch.getColor();
+			main.batch.setColor(color.r, color.g, color.b, 1f);
+		}
 		
 		main.batch.end();
 	}

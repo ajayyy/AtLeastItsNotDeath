@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.XmlReader.Element;
 
 public class RevivalScreen {
 	float x, y;
@@ -30,10 +31,19 @@ public class RevivalScreen {
 	
 	Random random = new Random();
 	
+	//for handling rotating upside down
+	boolean upsideDown;
+	float currentRotation = 0;
+	
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
+//		powerUps.add(new Power(0));
+//		powerUps.add(new Power(1));
+//		powerUps.add(new Power(2));
 		powerUps.add(new Power(3));
+//		powerUps.add(new Power(4));
+//		powerUps.add(new Power(5));
 		
 		powerDowns.add(new Power(0));
 	}
@@ -54,6 +64,27 @@ public class RevivalScreen {
 			revive(game, 0);
 		} else if (Gdx.input.isKeyJustPressed(Keys.D)) {
 			revive(game, 1);
+		}
+	}
+	
+	//called even when the revival screen is not open
+	public void constantUpdate(Game game) {
+		if (upsideDown) {
+			if (currentRotation < 180) {
+				float lerp = 4f;
+				float rotation = ((180 - currentRotation) * lerp * game.deltaTime);
+				
+				game.main.cam.rotate(rotation);
+				currentRotation += rotation;
+			}
+		} else {
+			if (currentRotation > 0) {
+				float lerp = 4f;
+				float rotation = ((-currentRotation) * lerp * game.deltaTime);
+				
+				game.main.cam.rotate(rotation);
+				currentRotation += rotation;
+			}
 		}
 	}
 	
@@ -168,7 +199,7 @@ public class RevivalScreen {
 		main.batch.draw(powerUpOptions[1].icon, option1Position.x + 75, option1Position.y - 275, 250, 250);
 		main.game.font.getData().setScale(0.4f);
 		textPosition = new Vector3(option1Position.x, option1Position.y - 300, 0);
-		main.game.font.draw(main.batch, powerUpOptions[0].description, textPosition.x, textPosition.y, 400, 1, true);
+		main.game.font.draw(main.batch, powerUpOptions[1].description, textPosition.x, textPosition.y, 400, 1, true);
 		
 		main.batch.draw(powerDownOptions[1][0].icon, option1Bad0Position.x + 32, option1Bad0Position.y - 106 - 32/3, 106, 106);
 		main.game.font.getData().setScale(0.2f);
