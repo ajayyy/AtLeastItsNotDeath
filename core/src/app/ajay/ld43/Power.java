@@ -24,72 +24,72 @@ public class Power {
 		case 0:
 			positive = true;
 			description = "Increase max player speed";
-			icon = new Texture("player.png");
+			icon = new Texture("playerSpeed.png");
 			break;
 		case 1:
 			positive = true;
 			description = "Increase player speed";
-			icon = new Texture("player.png");
+			icon = new Texture("playerSpeed.png");
 			break;
 		case 2:
 			positive = true;
 			description = "Increase player jump height";
-			icon = new Texture("player.png");
+			icon = new Texture("jumpSpeed.png");
 			break;
 		case 3:
 			positive = false;
 			description = "Upside down screen";
-			icon = new Texture("player.png");
+			icon = new Texture("upsideDown.png");
 			break;
 		case 4:
 			positive = false;
 			description = "Screen Shake";
-			icon = new Texture("player.png");
+			icon = new Texture("screenShake.png");
 			break;
 		case 5:
 			positive = false;
 			description = "Invisible Player";
-			icon = new Texture("player.png");
+			icon = new Texture("invisible.png");
 			break;
 		case 6:
 			positive = false;
 			description = "Random Rotation";
-			icon = new Texture("player.png");
+			icon = new Texture("upsideDown.png");
 			break;
 		case 7:
 			positive = false;
 			description = "Fading Player";
-			icon = new Texture("player.png");
+			icon = new Texture("invisible.png");
 			break;
 		case 8:
 			positive = false;
 			description = "Zoomed In";
-			icon = new Texture("player.png");
+			icon = new Texture("zoom.png");
 			break;
 		case 9:
 			positive = false;
 			description = "Random Zooming";
-			icon = new Texture("player.png");
+			icon = new Texture("zoom.png");
 			break;
 		case 10:
 			positive = true;
 			description = "More visibilty";
-			icon = new Texture("player.png");
+			icon = new Texture("zoom.png");
 			break;
 		case 11:
 			positive = true;
 			description = "Moon gravity";
-			icon = new Texture("player.png");
+			icon = new Texture("jumpSpeed.png");
 			break;
 		case 12:
 			positive = true;
 			description = "Slower Enemies";
-			icon = new Texture("player.png");
+			icon = new Texture("playerSpeed.png");
 			break;
 		case 13:
 			positive = false;
 			description = "Faster Enemies";
-			icon = new Texture("player.png");
+			icon = new Texture("playerSpeed.png");
 			break;
 		}
 	}
