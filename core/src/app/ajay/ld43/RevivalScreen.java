@@ -28,9 +28,9 @@ public class RevivalScreen {
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
-		powerUps.add(new Power(true, new Texture("player.png")));
+		powerUps.add(new Power(true, "5 times more speed", new Texture("player.png")));
 		
-		powerDowns.add(new Power(false, new Texture("player.png")));
+		powerDowns.add(new Power(false, "Increased gravity", new Texture("player.png")));
 	}
 	
 	public void chooseOptions() {
@@ -104,13 +104,37 @@ public class RevivalScreen {
 		//draw options
 		main.batch.begin();
 		
+		//left side
 		main.batch.draw(powerUpOptions[0].icon, option0Position.x + 75, option0Position.y - 275, 250, 250);
-		main.batch.draw(powerUpOptions[0].icon, option0Bad0Position.x + 32, option0Bad0Position.y - 106 - 32/3, 106, 106);
-		main.batch.draw(powerUpOptions[0].icon, option0Bad1Position.x + 32, option0Bad1Position.y - 106 - 32/3, 106, 106);
+		main.game.font.getData().setScale(0.4f);
+		textPosition = new Vector3(option0Position.x, option0Position.y - 300, 0);
+		main.game.font.draw(main.batch, powerUpOptions[0].description, textPosition.x, textPosition.y, 400, 1, true);
 		
-		main.batch.draw(powerUpOptions[0].icon, option1Position.x + 75, option1Position.y - 275, 250, 250);
-		main.batch.draw(powerUpOptions[0].icon, option1Bad0Position.x + 32, option1Bad0Position.y - 106 - 32/3, 106, 106);
-		main.batch.draw(powerUpOptions[0].icon, option1Bad1Position.x + 32, option1Bad1Position.y - 106 - 32/3, 106, 106);
+		main.batch.draw(powerDownOptions[0][0].icon, option0Bad0Position.x + 32, option0Bad0Position.y - 106 - 32/3, 106, 106);
+		main.game.font.getData().setScale(0.2f);
+		textPosition = new Vector3(option0Bad0Position.x, option0Bad0Position.y - 120, 0);
+		main.game.font.draw(main.batch, powerDownOptions[0][0].description, textPosition.x, textPosition.y, 170, 1, true);
+		
+		main.batch.draw(powerDownOptions[0][1].icon, option0Bad1Position.x + 32, option0Bad1Position.y - 106 - 32/3, 106, 106);
+		main.game.font.getData().setScale(0.2f);
+		textPosition = new Vector3(option0Bad1Position.x, option0Bad1Position.y - 120, 0);
+		main.game.font.draw(main.batch, powerDownOptions[0][1].description, textPosition.x, textPosition.y, 170, 1, true);
+		
+		//right side
+		main.batch.draw(powerUpOptions[1].icon, option1Position.x + 75, option1Position.y - 275, 250, 250);
+		main.game.font.getData().setScale(0.4f);
+		textPosition = new Vector3(option1Position.x, option1Position.y - 300, 0);
+		main.game.font.draw(main.batch, powerUpOptions[0].description, textPosition.x, textPosition.y, 400, 1, true);
+		
+		main.batch.draw(powerDownOptions[1][0].icon, option1Bad0Position.x + 32, option1Bad0Position.y - 106 - 32/3, 106, 106);
+		main.game.font.getData().setScale(0.2f);
+		textPosition = new Vector3(option1Bad0Position.x, option1Bad0Position.y - 120, 0);
+		main.game.font.draw(main.batch, powerDownOptions[1][0].description, textPosition.x, textPosition.y, 170, 1, true);
+		
+		main.batch.draw(powerDownOptions[1][1].icon, option1Bad1Position.x + 32, option1Bad1Position.y - 106 - 32/3, 106, 106);
+		main.game.font.getData().setScale(0.2f);
+		textPosition = new Vector3(option1Bad1Position.x, option1Bad1Position.y - 120, 0);
+		main.game.font.draw(main.batch, powerDownOptions[1][1].description, textPosition.x, textPosition.y, 170, 1, true);
 		
 		main.batch.end();
 	}

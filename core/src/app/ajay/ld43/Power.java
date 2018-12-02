@@ -12,8 +12,11 @@ public class Power {
 	
 	Texture icon;
 	
-	public Power(boolean positive, Texture icon) {
+	String description;
+	
+	public Power(boolean positive, String description, Texture icon) {
 		this.positive = positive;
+		this.description = description;
 		
 		this.icon = icon;
 	}
