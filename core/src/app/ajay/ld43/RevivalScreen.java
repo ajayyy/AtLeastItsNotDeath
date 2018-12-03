@@ -109,8 +109,8 @@ public class RevivalScreen {
 				Power powerDown = powerDowns.get(random.nextInt(powerDowns.size()));
 				
 				//if it does not work with others, keep picking new ones
-				while (powerUpOptions[i].doesNotWorkWith.contains(powerDown.type) && 
-						(s == 0 || (powerDownOptions[i][0].doesNotWorkWith.contains(powerDown.type) && powerDownOptions[i][0].type == powerDown.type))) {
+				while (powerUpOptions[i].doesNotWorkWith.contains(powerDown.type) || 
+						(s == 1 && (powerDownOptions[i][0].doesNotWorkWith.contains(powerDown.type) || powerDownOptions[i][0].type == powerDown.type))) {
 					powerDown = powerDowns.get(random.nextInt(powerDowns.size()));
 				}
 				
