@@ -29,7 +29,11 @@ public class Main extends ApplicationAdapter {
 	boolean hues;
 	float hue = 0;
 	
+	//power down that makes low visibilty
+	boolean lighting;
+	
 	ShaderProgram huesShader;
+	ShaderProgram lightingShader;
 	
 	@Override
 	public void create () {
@@ -44,6 +48,10 @@ public class Main extends ApplicationAdapter {
         huesShader = new ShaderProgram(Gdx.files.internal("shaders/hues.vsh"), Gdx.files.internal("shaders/hues.fsh"));
   		if (huesShader.getLog().length() != 0) {
 			System.out.println("hues error: \n\n" + huesShader.getLog());
+  		}
+  		lightingShader = new ShaderProgram(Gdx.files.internal("shaders/lighting.vsh"), Gdx.files.internal("shaders/lighting.fsh"));
+  		if (lightingShader.getLog().length() != 0) {
+			System.out.println("lightingShader error: \n\n" + lightingShader.getLog());
   		}
   		
   		ShaderProgram.pedantic = false;
@@ -113,11 +121,24 @@ public class Main extends ApplicationAdapter {
 			startedHues = true;
 		}
 		
+		boolean startedLighting = false;
+		if (lighting) {
+			lightingShader.begin();
+			lightingShader.setUniform2fv("position", new float[]{game.player.x + game.player.width / 2, game.player.y + game.player.height / 2}, 0, 2);
+			batch.setShader(lightingShader);
+			startedLighting = true;
+		}
+		
 		//render all objects
 		game.render();
 		
 		if (startedHues) {
 			huesShader.end();
+			batch.setShader(null);
+		}
+		
+		if (startedLighting) {
+			lightingShader.end();
 			batch.setShader(null);
 		}
 		

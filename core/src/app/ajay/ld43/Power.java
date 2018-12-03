@@ -101,6 +101,11 @@ public class Power {
 			description = "Constant Color Changing";
 			icon = new Texture("screenShake.png");
 			break;
+		case 16:
+			positive = false;
+			description = "Low lighting";
+			icon = new Texture("screenShake.png");
+			break;
 		}
 	}
 	
@@ -161,6 +166,9 @@ public class Power {
 			break;
 		case 15:
 			game.main.hues = true;
+			break;
+		case 16:
+			game.main.lighting = true;
 			break;
 		}
 	}
@@ -225,6 +233,9 @@ public class Power {
 			break;
 		case 15:
 			game.main.hues = false;
+			break;
+		case 16:
+			game.main.lighting = false;
 			break;
 		}
 	}
