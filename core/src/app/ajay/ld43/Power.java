@@ -26,6 +26,10 @@ public class Power {
 		this.type = type;
 		
 		switch (type) {
+		case -1:
+			description = "Nothing :)";
+			icon = new Texture("player.png");
+			break;
 		case 0:
 			positive = true;
 			description = "Increase max player speed";
