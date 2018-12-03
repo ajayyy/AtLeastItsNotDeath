@@ -75,6 +75,10 @@ public class Player {
 		
 		//check if on a platform
 		Platform currentPlatform = game.getPlatform(x, y, width, height);
+		if (game.platforms.get(game.platforms.size() - 1) == currentPlatform) {
+			//win
+			game.win = true;
+		}
 		
 		//handle input
 		if(Gdx.input.isKeyPressed(Keys.D)) {

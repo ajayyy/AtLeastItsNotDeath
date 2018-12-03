@@ -60,7 +60,7 @@ public class RevivalScreen {
 			"Hello again",
 			"Never going to give you up...",
 			"I see you want to try again...",
-			"Hint, it is kind of impossible",
+			"Hint, it is pretty difficult",
 			"K.",
 			"lol ur back",
 			"..."
