@@ -57,6 +57,8 @@ public class Power {
 			description = "Invisible Player";
 			icon = new Texture("invisible.png");
 			doesNotWorkWith.add(7);
+			doesNotWorkWith.add(15);
+			doesNotWorkWith.add(16);
 			break;
 		case 6:
 			positive = false;
@@ -69,6 +71,8 @@ public class Power {
 			description = "Fading Player";
 			icon = new Texture("invisible.png");
 			doesNotWorkWith.add(5);
+			doesNotWorkWith.add(15);
+			doesNotWorkWith.add(16);
 			break;
 		case 8:
 			positive = false;
@@ -114,12 +118,16 @@ public class Power {
 			description = "Constant Color Changing";
 			icon = new Texture("screenShake.png");
 			doesNotWorkWith.add(16);
+			doesNotWorkWith.add(7);
+			doesNotWorkWith.add(5);
 			break;
 		case 16:
 			positive = false;
 			description = "Low lighting";
 			icon = new Texture("screenShake.png");
 			doesNotWorkWith.add(15);
+			doesNotWorkWith.add(7);
+			doesNotWorkWith.add(5);
 			break;
 		}
 	}

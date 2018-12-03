@@ -203,6 +203,12 @@ public class RevivalScreen {
 		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 150, 0));
 		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
 		
+		message = "Press A or D to select an option";
+		main.game.font.getData().setScale(0.4f);
+		layout.setText(main.game.font, message);
+		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, Gdx.graphics.getHeight() - 100, 0));
+		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
+		
 		message = "OR";
 		main.game.font.getData().setScale(1f);
 		layout.setText(main.game.font, message);
