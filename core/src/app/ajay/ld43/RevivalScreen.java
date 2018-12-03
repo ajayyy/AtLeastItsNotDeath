@@ -48,25 +48,25 @@ public class RevivalScreen {
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
-//		powerUps.add(new Power(0));
-//		powerUps.add(new Power(1));
-//		powerUps.add(new Power(2));
-//		powerUps.add(new Power(3));
-//		powerUps.add(new Power(4));
-//		powerUps.add(new Power(5));
-//		powerUps.add(new Power(6));
-//		powerUps.add(new Power(7));
-//		powerUps.add(new Power(8));
-//		powerUps.add(new Power(9));
-//		powerUps.add(new Power(10));
-//		powerUps.add(new Power(11));
-//		powerUps.add(new Power(12));
-//		powerUps.add(new Power(13));
+		powerUps.add(new Power(0));
+		powerUps.add(new Power(1));
+		powerUps.add(new Power(2));
+		powerUps.add(new Power(10));
+		powerUps.add(new Power(11));
+		powerUps.add(new Power(12));
 		powerUps.add(new Power(14));
-		powerUps.add(new Power(15));
-		powerUps.add(new Power(16));
+
 		
-		powerDowns.add(new Power(0));
+		powerDowns.add(new Power(3));
+		powerDowns.add(new Power(4));
+		powerDowns.add(new Power(5));
+		powerDowns.add(new Power(6));
+		powerDowns.add(new Power(7));
+		powerDowns.add(new Power(8));
+		powerDowns.add(new Power(9));
+		powerDowns.add(new Power(13));
+		powerDowns.add(new Power(15));
+		powerDowns.add(new Power(16));
 	}
 	
 	public void chooseOptions() {
@@ -75,7 +75,15 @@ public class RevivalScreen {
 		}
 		for (int i = 0 ; i < powerDownOptions.length; i++) {
 			for (int s = 0 ; s < powerDownOptions[i].length; s++) {
-				powerDownOptions[i][s] =  powerDowns.get(random.nextInt(powerDowns.size()));
+				Power powerDown = powerDowns.get(random.nextInt(powerDowns.size()));
+				
+				//if it does not work with others, keep picking new ones
+				while (powerUpOptions[i].doesNotWorkWith.contains(powerDown.type) && 
+						(s == 0 || (powerDownOptions[i][0].doesNotWorkWith.contains(powerDown.type) && powerDownOptions[i][0].type == powerDown.type))) {
+					powerDown = powerDowns.get(random.nextInt(powerDowns.size()));
+				}
+				
+				powerDownOptions[i][s] = powerDown;
 			}
 		}
 	}

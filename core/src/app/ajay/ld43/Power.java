@@ -1,5 +1,7 @@
 package app.ajay.ld43;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -16,6 +18,9 @@ public class Power {
 	String description;
 	
 	int type;
+	
+	//the powerdown types this power up does not work with
+	ArrayList<Integer> doesNotWorkWith = new ArrayList<Integer>();
 	
 	public Power(int type) {
 		this.type = type;
@@ -40,6 +45,7 @@ public class Power {
 			positive = false;
 			description = "Upside down screen";
 			icon = new Texture("upsideDown.png");
+			doesNotWorkWith.add(6);
 			break;
 		case 4:
 			positive = false;
@@ -50,31 +56,37 @@ public class Power {
 			positive = false;
 			description = "Invisible Player";
 			icon = new Texture("invisible.png");
+			doesNotWorkWith.add(7);
 			break;
 		case 6:
 			positive = false;
 			description = "Random Rotation";
 			icon = new Texture("upsideDown.png");
+			doesNotWorkWith.add(3);
 			break;
 		case 7:
 			positive = false;
 			description = "Fading Player";
 			icon = new Texture("invisible.png");
+			doesNotWorkWith.add(5);
 			break;
 		case 8:
 			positive = false;
 			description = "Zoomed In";
 			icon = new Texture("zoom.png");
+			doesNotWorkWith.add(9);
 			break;
 		case 9:
 			positive = false;
 			description = "Random Zooming";
 			icon = new Texture("zoom.png");
+			doesNotWorkWith.add(9);
 			break;
 		case 10:
 			positive = true;
 			description = "More visibilty";
 			icon = new Texture("zoom.png");
+			doesNotWorkWith.add(8);
 			break;
 		case 11:
 			positive = true;
@@ -85,6 +97,7 @@ public class Power {
 			positive = true;
 			description = "Slower Enemies";
 			icon = new Texture("playerSpeed.png");
+			doesNotWorkWith.add(13);
 			break;
 		case 13:
 			positive = false;
@@ -100,11 +113,13 @@ public class Power {
 			positive = false;
 			description = "Constant Color Changing";
 			icon = new Texture("screenShake.png");
+			doesNotWorkWith.add(16);
 			break;
 		case 16:
 			positive = false;
 			description = "Low lighting";
 			icon = new Texture("screenShake.png");
+			doesNotWorkWith.add(15);
 			break;
 		}
 	}
