@@ -54,9 +54,9 @@ public class Enemy {
 		//check for collision with player
 		if (x < game.player.x + game.player.width && x + width > game.player.x &&
 				y < game.player.y + game.player.height && y + height > game.player.y) {
-//			game.player.dead = true;
-//			game.player.y = -100;
-//			game.died();
+			game.player.dead = true;
+			game.player.y = -100;
+			game.died();
 		}
 	}
 	

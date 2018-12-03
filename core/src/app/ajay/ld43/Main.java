@@ -3,13 +3,16 @@ package app.ajay.ld43;
 import java.util.Set;
 
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.bitfire.postprocessing.PostProcessor;
 import com.bitfire.postprocessing.effects.Bloom;
 import com.bitfire.utils.ShaderLoader;
@@ -34,6 +37,9 @@ public class Main extends ApplicationAdapter {
 	
 	ShaderProgram huesShader;
 	ShaderProgram lightingShader;
+	
+	boolean startMenu = true;
+	Texture background;
 	
 	@Override
 	public void create () {
@@ -65,6 +71,8 @@ public class Main extends ApplicationAdapter {
 		
 		cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
 		cam.update();
+		
+		background = new Texture("game.png");
 	}
 	
 	@Override
@@ -92,8 +100,10 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		//update all objects
-		game.update();
+		if (!startMenu) {
+			//update all objects
+			game.update();
+		}
 		
 		//setup post processing
 		postProcessor.capture();
@@ -129,8 +139,41 @@ public class Main extends ApplicationAdapter {
 			startedLighting = true;
 		}
 		
-		//render all objects
-		game.render();
+		if (!startMenu) {
+			//render all objects
+			game.render();
+		} else {
+			batch.begin();
+			
+			batch.draw(background, 0, 0);
+			
+			String message = "At least it's not death...";
+			game.font.getData().setScale(1f);
+			Vector3 textPosition = cam.unproject(new Vector3(0, 10, 0));
+			game.font.draw(batch, message, textPosition.x, textPosition.y, Gdx.graphics.getWidth(), 1, true);
+			
+			message = "This is a platformer, try to reach the end. If you die, you might be "
+					+ "able to be ressurected and given ONE powerup. However, that is in exchange for two sacrifices... Good Luck!";
+			game.font.getData().setScale(0.4f);
+			textPosition = cam.unproject(new Vector3(0, 300, 0));
+			game.font.draw(batch, message, textPosition.x, textPosition.y, Gdx.graphics.getWidth(), 1, true);
+			
+			message = "By Ajay Ramachandran for Ludum Dare 43     https://ajay.app      dev@ajay.app";
+			game.font.getData().setScale(0.4f);
+			textPosition = cam.unproject(new Vector3(0, 600, 0));
+			game.font.draw(batch, message, textPosition.x, textPosition.y, Gdx.graphics.getWidth(), 1, true);
+			
+			message = "Press A to start";
+			game.font.getData().setScale(1f);
+			textPosition = cam.unproject(new Vector3(0, Gdx.graphics.getHeight() - 100, 0));
+			game.font.draw(batch, message, textPosition.x, textPosition.y, Gdx.graphics.getWidth(), 1, true);
+			
+			if (Gdx.input.isKeyPressed(Keys.A)) {
+				startMenu = false;
+			}
+			
+			batch.end();
+		}
 		
 		if (startedHues) {
 			huesShader.end();

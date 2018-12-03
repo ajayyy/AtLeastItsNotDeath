@@ -112,7 +112,6 @@ public class Game {
 				message = "You Won on your first try? Nice, but I suggest "
 						+ "trying again. The fun in this game is losing :). You must re-launch the program to play again.";
 				main.game.font.getData().setScale(0.7f);
-				revivalScreen.layout.setText(main.game.font, message);
 				textPosition = main.cam.unproject(new Vector3(0, 300, 0));
 				main.game.font.draw(main.batch, message, textPosition.x, textPosition.y, Gdx.graphics.getWidth(), 1, true);
 			}
