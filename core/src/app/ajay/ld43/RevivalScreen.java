@@ -45,6 +45,28 @@ public class RevivalScreen {
 	float targetZoom = -1;
 	float currentZoom = 1;
 	
+	//is it the first time this player died?
+	boolean firstTime = true;
+	String[] possibleMessages = {
+			"It looks like you need a bit of help...",
+			"Seriously, again....",
+			"Why don't you get better",
+			"Welcome back, pick your poison...",
+			"Here are some things to help you out",
+			"You did an awesome job that last one!",
+			"Good luck with your next try!",
+			"You just keep getting worse, come on...",
+			"You are terrible",
+			"Hello again",
+			"Never going to give you up...",
+			"I see you want to try again...",
+			"Hint, it is kind of impossible",
+			"K.",
+			"lol ur back",
+			"..."
+	};
+	String currentMessage;
+	
 	public RevivalScreen() {
 		layout = new GlyphLayout();
 		
@@ -86,6 +108,13 @@ public class RevivalScreen {
 				
 				powerDownOptions[i][s] = powerDown;
 			}
+		}
+		
+		if (!firstTime) {
+			currentMessage = possibleMessages[random.nextInt(possibleMessages.length)];
+		} else {
+			currentMessage = possibleMessages[0];
+			firstTime = false;
 		}
 	}
 	
@@ -192,7 +221,7 @@ public class RevivalScreen {
 		Vector3 textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 10, 0));
 		main.game.font.draw(main.batch, message, textPosition.x, textPosition.y);
 		
-		message = "It looks like you need a bit of help...";
+		message = currentMessage;
 		main.game.font.getData().setScale(0.6f);
 		layout.setText(main.game.font, message);
 		textPosition = main.cam.unproject(new Vector3(Gdx.graphics.getWidth()/2 - layout.width/2, 100, 0));
