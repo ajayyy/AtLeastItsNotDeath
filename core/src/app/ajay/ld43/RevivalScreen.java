@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -44,6 +45,9 @@ public class RevivalScreen {
 	boolean randomZoom;
 	float targetZoom = -1;
 	float currentZoom = 1;
+	
+	Sound select;
+	Sound dead;
 	
 	//is it the first time this player died?
 	boolean firstTime = true;
@@ -91,6 +95,9 @@ public class RevivalScreen {
 		powerDowns.add(new Power(15));
 		powerDowns.add(new Power(16));
 		powerDowns.add(new Power(17));
+		
+		select = Gdx.audio.newSound(Gdx.files.internal("select.wav"));
+		dead = Gdx.audio.newSound(Gdx.files.internal("dead.wav"));
 	}
 	
 	public void chooseOptions() {
@@ -200,6 +207,8 @@ public class RevivalScreen {
 		if (currentPowerDowns[1] != null) {
 			currentPowerDowns[1].dispose(game);
 		}
+		
+		dead.play();
 	}
 	
 	public void revive(Game game, int side) {
@@ -211,6 +220,8 @@ public class RevivalScreen {
 		currentPowerDowns[1].use(game);
 		
 		game.player.revive();
+		
+		select.play();
 	}
 	
 	public void render(Main main) {
