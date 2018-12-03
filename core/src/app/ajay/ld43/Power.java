@@ -116,6 +116,7 @@ public class Power {
 			positive = true;
 			description = "Make player smaller";
 			icon = new Texture("screenShake.png");
+			doesNotWorkWith.add(17);
 			break;
 		case 15:
 			positive = false;
@@ -132,6 +133,12 @@ public class Power {
 			doesNotWorkWith.add(15);
 			doesNotWorkWith.add(7);
 			doesNotWorkWith.add(5);
+			break;
+		case 17:
+			positive = false;
+			description = "Make player larger";
+			icon = new Texture("screenShake.png");
+			doesNotWorkWith.add(14);
 			break;
 		}
 	}
@@ -196,6 +203,10 @@ public class Power {
 			break;
 		case 16:
 			game.main.lighting = true;
+			break;
+		case 17:
+			game.player.width = game.player.defaultWidth * 3f;
+			game.player.height = game.player.defaultHeight * 3f;
 			break;
 		}
 	}
@@ -263,6 +274,10 @@ public class Power {
 			break;
 		case 16:
 			game.main.lighting = false;
+			break;
+		case 17:
+			game.player.width = game.player.defaultWidth;
+			game.player.height = game.player.defaultHeight;
 			break;
 		}
 	}

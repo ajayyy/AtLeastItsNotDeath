@@ -90,6 +90,7 @@ public class RevivalScreen {
 		powerDowns.add(new Power(13));
 		powerDowns.add(new Power(15));
 		powerDowns.add(new Power(16));
+		powerDowns.add(new Power(17));
 	}
 	
 	public void chooseOptions() {
