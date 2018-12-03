@@ -63,6 +63,7 @@ public class RevivalScreen {
 //		powerUps.add(new Power(12));
 //		powerUps.add(new Power(13));
 		powerUps.add(new Power(14));
+		powerUps.add(new Power(15));
 		
 		powerDowns.add(new Power(0));
 	}

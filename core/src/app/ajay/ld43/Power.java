@@ -96,6 +96,11 @@ public class Power {
 			description = "Make player smaller";
 			icon = new Texture("screenShake.png");
 			break;
+		case 15:
+			positive = false;
+			description = "Constant Color Changing";
+			icon = new Texture("screenShake.png");
+			break;
 		}
 	}
 	
@@ -153,6 +158,9 @@ public class Power {
 		case 14:
 			game.player.width = game.player.defaultWidth / 2f;
 			game.player.height = game.player.defaultHeight / 2f;
+			break;
+		case 15:
+			game.main.hues = true;
 			break;
 		}
 	}
@@ -214,6 +222,9 @@ public class Power {
 		case 14:
 			game.player.width = game.player.defaultWidth;
 			game.player.height = game.player.defaultHeight;
+			break;
+		case 15:
+			game.main.hues = false;
 			break;
 		}
 	}

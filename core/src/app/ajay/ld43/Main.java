@@ -1,11 +1,14 @@
 package app.ajay.ld43;
 
+import java.util.Set;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.bitfire.postprocessing.PostProcessor;
 import com.bitfire.postprocessing.effects.Bloom;
@@ -22,6 +25,12 @@ public class Main extends ApplicationAdapter {
 	PostProcessor postProcessor;
 	Bloom bloom;
 	
+	//powerdown that constanly changes hues
+	boolean hues;
+	float hue = 0;
+	
+	ShaderProgram huesShader;
+	
 	@Override
 	public void create () {
 		
@@ -30,6 +39,14 @@ public class Main extends ApplicationAdapter {
         postProcessor = new PostProcessor(false, false, Gdx.app.getType() == ApplicationType.Desktop);
         bloom = new Bloom((int) (Gdx.graphics.getWidth() * 0.25f), (int) (Gdx.graphics.getHeight() * 0.25f));
         postProcessor.addEffect( bloom );
+        
+        //hue shader
+        huesShader = new ShaderProgram(Gdx.files.internal("shaders/hues.vsh"), Gdx.files.internal("shaders/hues.fsh"));
+  		if (huesShader.getLog().length() != 0) {
+			System.out.println("hues error: \n\n" + huesShader.getLog());
+  		}
+  		
+  		ShaderProgram.pedantic = false;
 		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
@@ -82,8 +99,27 @@ public class Main extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		boolean startedHues = false;
+		if (hues) {
+			huesShader.begin();
+			huesShader.setUniformf("hue", hue);
+			batch.setShader(huesShader);
+			
+			hue += 0.5f * game.deltaTime;
+			if (hue > 1) {
+				hue = 0;
+			}
+			
+			startedHues = true;
+		}
+		
 		//render all objects
 		game.render();
+		
+		if (startedHues) {
+			huesShader.end();
+			batch.setShader(null);
+		}
 		
 		//render the result
         postProcessor.render();
