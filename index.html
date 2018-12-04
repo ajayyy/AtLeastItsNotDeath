@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+       <head>
+              <title>At Least It's Not Death - Ludum Dare 43</title>
+              <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+              <link href="styles.css" rel="stylesheet" type="text/css">
+              <script src="soundmanager2-setup.js"></script>
+  			  <script src="soundmanager2-jsmin.js"></script>
+			  <script>
+
+        var extra = 1;
+
+        if (window.innerHeight < 540) {
+          var sheet = window.document.styleSheets[0];
+          sheet.insertRule('body { zoom: 0.4; }', sheet.cssRules.length);
+          extra = 2.5;
+          window.setTimeout(resize, 100);
+        } else if (window.innerHeight < 640) {
+          var sheet = window.document.styleSheets[0];
+          sheet.insertRule('body { zoom: 0.6; }', sheet.cssRules.length);
+          extra = 1.66666;
+          window.setTimeout(resize, 100);
+        } else if (window.innerHeight < 750) {
+					var sheet = window.document.styleSheets[0];
+					sheet.insertRule('body { zoom: 0.8; }', sheet.cssRules.length);
+          extra = 1.25;
+					window.setTimeout(resize, 100);
+				}
+				
+				function resize(){
+          if (window.innerHeight < 540) {
+            var sheet = window.document.styleSheets[0];
+            sheet.insertRule('body { zoom: 0.4; }', sheet.cssRules.length);
+            extra = 2.5;
+          } else if (window.innerHeight < 640) {
+            var sheet = window.document.styleSheets[0];
+            sheet.insertRule('body { zoom: 0.6; }', sheet.cssRules.length);
+            extra = 1.66666;
+          } else if (window.innerHeight < 750) {
+            var sheet = window.document.styleSheets[0];
+            sheet.insertRule('body { zoom: 0.8; }', sheet.cssRules.length);
+            extra = 1.25;
+          }
+
+          try {
+            document.getElementsByTagName("canvas")[0].setAttribute("width", window.innerWidth * extra);
+            document.getElementsByTagName("canvas")[0].setAttribute("height", window.innerHeight * extra);
+          }
+          catch(error) {
+            window.setTimeout(resize, 100);
+          }
+					
+				}
+
+
+			  </script>
+       </head>
+
+       <body onresize="resize()">
+              <div align="center" id="embed-html"></div>
+              <script type="text/javascript" src="html/html.nocache.js"></script>
+       </body>
+
+       <script>
+              function handleMouseDown(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.target.style.cursor = 'default';
+                window.focus();
+              }
+
+              function handleMouseUp(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.target.style.cursor = '';
+              }
+              document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
+              document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+       </script>
+</html>
